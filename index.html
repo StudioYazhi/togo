@@ -1,0 +1,613 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Togo by Ligne Roset — Price Guide</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Work+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --stone: #EFEAE1;
+    --ink: #1C1B19;
+    --ink-soft: #55524A;
+    --bottle: #2F4538;
+    --bottle-deep: #223328;
+    --rust: #B4623E;
+    --line: #C9C0AE;
+    --paper: #F8F5EE;
+  }
+  *{ box-sizing: border-box; }
+  body{
+    margin:0;
+    background: var(--stone);
+    color: var(--ink);
+    font-family: 'Work Sans', sans-serif;
+    line-height: 1.5;
+  }
+  .wrap{ max-width: 1040px; margin: 0 auto; padding: 56px 24px 80px; }
+  header.masthead{
+    display:flex; justify-content: space-between; align-items: flex-end; gap: 24px;
+    border-bottom: 1px solid var(--line); padding-bottom: 28px; margin-bottom: 48px; flex-wrap: wrap;
+  }
+  .masthead h1{
+    font-family: 'Fraunces', serif; font-weight: 500; font-size: clamp(32px, 5vw, 48px);
+    margin: 0 0 6px; max-width: 16ch;
+  }
+  .masthead p{ margin: 0; color: var(--ink-soft); max-width: 46ch; font-size: 15px; }
+  .masthead .badge{
+    font-size: 13px; color: var(--bottle-deep); border: 1px solid var(--bottle);
+    padding: 6px 12px; border-radius: 100px; white-space: nowrap;
+  }
+  .layout{ display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 48px; align-items: start; }
+  @media (max-width: 860px){ .layout{ grid-template-columns: 1fr; } }
+  .field{ margin-bottom: 26px; }
+  .field label{ display:block; font-size: 13px; color: var(--ink-soft); margin-bottom: 8px; }
+  .field .field-note{ font-size: 12px; color: var(--ink-soft); font-style: italic; margin: -4px 0 8px; }
+  .options{ display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 10px; }
+  .colour-options{ display: grid; grid-template-columns: repeat(auto-fill, minmax(120px, 1fr)); gap: 8px; }
+  .opt{
+    border: 1px solid var(--line); background: var(--paper); padding: 12px 14px; border-radius: 2px;
+    cursor: pointer; font-size: 14px; text-align: left; transition: border-color 0.15s ease, background 0.15s ease;
+  }
+  .opt:hover{ border-color: var(--bottle); }
+  .opt.selected{ border-color: var(--bottle); background: var(--bottle); color: var(--paper); }
+  .opt .opt-sub{ display:block; font-size: 12px; color: inherit; opacity: 0.7; margin-top: 3px; }
+  .opt.colour{ display: flex; align-items: center; gap: 8px; padding: 8px 10px; font-size: 13px; }
+  .opt.colour .swatch{ width: 16px; height: 16px; border-radius: 50%; border: 1px solid rgba(0,0,0,0.2); flex-shrink: 0; }
+  .opt.safari{ border-style: dashed; }
+  .no-colour-note{ font-size: 13px; color: var(--ink-soft); font-style: italic; }
+  select.field-select{
+    width: 100%; padding: 12px 14px; border: 1px solid var(--line); background: var(--paper);
+    color: var(--ink); font-family: inherit; font-size: 14px; border-radius: 2px; appearance: none;
+    background-image: linear-gradient(45deg, transparent 50%, var(--ink-soft) 50%), linear-gradient(135deg, var(--ink-soft) 50%, transparent 50%);
+    background-position: calc(100% - 20px) center, calc(100% - 15px) center; background-size: 5px 5px, 5px 5px; background-repeat: no-repeat;
+  }
+  .panel{ background: var(--bottle-deep); color: var(--paper); padding: 36px 32px; border-radius: 3px; position: sticky; top: 24px; }
+
+  .photo-frame{
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    background: rgba(248,245,238,0.06);
+    border-radius: 2px;
+    overflow: hidden;
+    margin-bottom: 8px;
+  }
+  .photo-frame img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+  .photo-note{
+    font-size: 11px;
+    color: #9FB4A5;
+    margin: 0 0 24px;
+    min-height: 14px;
+  }
+
+  .panel .item-name{ font-family: 'Fraunces', serif; font-size: 22px; font-weight: 500; margin: 0 0 4px; }
+  .panel .item-spec{ font-size: 13px; color: #C9D6CB; margin: 0 0 6px; }
+  .panel .item-dims{ font-size: 12px; color: #9FB4A5; margin: 0 0 28px; }
+  .price-row{ display:flex; justify-content: space-between; align-items: baseline; padding: 14px 0; border-top: 1px solid rgba(248,245,238,0.16); }
+  .price-row:first-of-type{ border-top: none; }
+  .price-row .label{ font-size: 13px; color: #C9D6CB; }
+  .price-row .value{ font-size: 15px; }
+  .price-row.total{ margin-top: 6px; padding-top: 22px; border-top: 1px solid rgba(248,245,238,0.3); }
+  .price-row.total .label{ font-size: 14px; color: var(--paper); }
+  .price-row.total .value{ font-family: 'Fraunces', serif; font-size: 34px; font-weight: 500; }
+  .save-note{ margin-top: 6px; font-size: 13px; color: #E8B79B; }
+  .cta{
+    display:block; text-align:center; margin-top: 28px; padding: 14px; background: var(--rust); color: var(--paper);
+    text-decoration: none; font-size: 14px; border-radius: 2px; border: none; width: 100%; cursor: pointer; font-family: inherit;
+  }
+  .cta:hover{ background: #9F5636; }
+  .fine-print{ margin-top: 48px; padding-top: 24px; border-top: 1px solid var(--line); font-size: 12px; color: var(--ink-soft); max-width: 62ch; }
+  .fine-print p{ margin: 0 0 8px; }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="masthead">
+    <div>
+      <h1>Togo by Ligne Roset</h1>
+      <p>Every Togo piece is made to order in Briord, France. Configure a piece to see the price before it's ordered.</p>
+    </div>
+    <span class="badge">Studio Yazhi offer<br>20% off list price</span>
+  </header>
+
+  <div class="layout">
+    <div class="config">
+
+      <div class="field">
+        <label for="product">Piece</label>
+        <select id="product" class="field-select"></select>
+      </div>
+
+      <div class="field">
+        <label>Fabric</label>
+        <p class="field-note" id="fabricNote"></p>
+        <div id="materialOptions" class="options"></div>
+      </div>
+
+      <div class="field">
+        <label>Colour</label>
+        <div id="colourOptions" class="colour-options"></div>
+      </div>
+
+    </div>
+
+    <aside class="panel">
+      <div class="photo-frame">
+        <img id="panelPhoto" alt="" />
+      </div>
+      <p class="photo-note" id="photoNote"></p>
+
+      <p class="item-name" id="panelName">&mdash;</p>
+      <p class="item-spec" id="panelSpec">&mdash;</p>
+      <p class="item-dims" id="panelDims">&mdash;</p>
+
+      <div class="price-row">
+        <span class="label">List price</span>
+        <span class="value" id="listPrice">&mdash;</span>
+      </div>
+      <div class="price-row total">
+        <span class="label">Studio Yazhi offer price</span>
+        <span class="value" id="yourPrice">&mdash;</span>
+      </div>
+      <p class="save-note" id="saveNote"></p>
+
+      <button class="cta" id="enquireBtn" type="button">Enquire on WhatsApp</button>
+      <a class="cta" id="viewBtn" href="#" target="_blank" style="margin-top:8px;text-decoration:none; background:#444;">View product page</a>
+    </aside>
+  </div>
+
+  <div class="fine-print">
+    <p>Prices are guide prices for made-to-order pieces and are confirmed at the point of order. Measurements may vary by up to 3cm due to the handmade nature of upholstered products. Please be aware that colour and texture might vary from your screen to the product. If in doubt, please contact Studio Yazhi. Lead times and final specification are agreed directly before anything is placed.</p>
+  </div>
+
+</div>
+
+<script>
+/* ============================================================
+   CATALOGUE — Togo by Ligne Roset.
+   Each piece has up to 7 fabric tiers, roughly cheapest to priciest:
+   Festa/Laco < Parade < Capa < Arda < Alcantara < Gentle/Diva Leather.
+   Only Festa/Laco (the published starting price) and, on Small Sofa
+   and Large Sofa, Alcantara (confirmed via a fabric-locked SKU) have
+   real prices. Everything else shows "Enquire" rather than a guess.
+   Fireside Chair and Small Sofa also offer the Togo Safari fabric
+   (Tablu by Sahco, in Zebra or Panther) as an extra finish.
+   Boss Lounge Chair is a distinct two-tone finish, sold separately
+   from the standard fabric range.
+   ============================================================ */
+
+const DISCOUNT_RATE = 0.20; // client price = list price x (1 - 0.20)
+const WHATSAPP_NUMBER = '7735995169'; // Replace with your actual WhatsApp number
+
+// Exact colour lists from Chaplins product pages (expanded via "View more" buttons)
+const FESTA_COLOURS = ['Alezan', 'Blanc', 'Bleau paon', 'Brume', 'Cachou', 'Cauri', 'Mimosa', 'Veronese'];
+const LACO_COLOURS = ['Aigumarine Laco', 'Anis Laco', 'Anthracite Laco', 'Argent Laco', 'Ecru Laco', 'Emeralde Laco', 'Framboise Laco', 'Lie De Vin Laco', 'Marine Laco', 'Miel Laco', 'Sapin Laco', 'Vieux Rose Laco'];
+const FESTA_LACO_COLOURS = [...FESTA_COLOURS, ...LACO_COLOURS]; // Combined for single fabric option
+const PARADE_COLOURS = ['Amande 3921', 'Anthracite 3927', 'Bouteille 3924', 'Cafe 3929', 'Ecru 3922', 'Green Blue 3928', 'Indigo 3926', 'Rose 3920', 'Terre Brulee 3923', 'Violine 3925'];
+const CAPA_COLOURS = ['Bouton Capa', 'Brique Capa', 'Amande Capa', 'Anthracite Capa', 'Blue Capa', 'Ecru Capa', 'Grege Capa', 'Gris Capa', 'Outremer Capa', 'Rose Capa', 'Vert Capa'];
+const ARDA_COLOURS = ['Arda 0351', 'Arda 0313', 'Arda 0161', 'Arda 0201', 'Arda 0211', 'Arda 0321', 'Arda 0671', 'Arda 0771', 'Arda 0791', 'Arda 0931', 'Arda 0991', 'Arda 0961'];
+const ALCANTARA_COLOURS = ['Nile blue 7996', 'Almond green', 'Anthracite', 'Aubergine', 'Aubusson', 'Slate black', 'Bohemian', 'Cadmium', 'Camel', 'Chic grey', 'Commodore', 'Curry', 'Dark camel', 'Dove grey', 'Eggshell', 'Ice', 'Infanta', 'Kiwi', 'Lizard', 'Navy blue', 'Orange', 'Pearl', 'Pompeian', 'Powder', 'Sea', 'Sea sand', 'Steel', 'Trekking'];
+const GENTLE_COLOURS = ['Anthracite 3213', 'Bordeaux 3211', 'Onyx 3212', 'Petrole 3220', 'Prune 3216', 'Abricot 3209', 'Breeze 3214', 'Cerise 3228', 'Ciel 3219', 'Cosmos 3217', 'Fiesta 3229', 'Funghi 3225', 'Herbal 3223', 'Iron 3215', 'Marsala 3227', 'Misty 3224', 'Pin 3222', 'Roi 3218', 'Rouille 3210', 'Sarcelle 3221', 'Tender 3226'];
+const DIVA_COLOURS = ['Ice 109', 'Marine 77127', 'Fauve 33001', 'Blanc 100', 'Noir 99999', 'Perle 1037', 'Taupe 13072', 'Laurier 1003', 'Chanvre 1061', 'Silex 11049', 'Sable 22030', 'Noisette 33004', 'Cerise 35126', 'Courge 45065', 'Bisque 54035', 'Rouge 55002', 'Platine 71017', 'Indigo 77158', 'Cachou 93068', 'Fudge 93129', 'Graphite 97038', 'Egee 17027', 'Foret 98015', 'Albatre 118', 'Grege 1021', 'Silice 1085', 'Acier 11033', 'Roche 11073', 'Pierre 13048', 'Mastic 13087', 'Chamois 22024', 'Gold 44012', 'Camel 43054', 'Ardoise 91102', 'Marron 93099', 'Cypres 98047', 'Lilas 1043', 'Amande 33077', 'Sunset 45035', 'Ocre 54021', 'Soleil 54033', 'Cacao 93109', 'Beluga 98087'];
+
+function sixFabrics(basePrice, alcantaraPrice, overrides){
+  const base = basePrice || null;
+  if (!base) return [
+    { id: 'festa-laco', label: 'Festa/Laco', price: null, colours: FESTA_LACO_COLOURS, verified: false },
+    { id: 'parade', label: 'Parade Fabric', price: null, colours: PARADE_COLOURS, verified: false },
+    { id: 'capa', label: 'Capa', price: null, colours: CAPA_COLOURS, verified: false },
+    { id: 'arda', label: 'Arda', price: null, colours: ARDA_COLOURS, verified: false },
+    { id: 'alcantara', label: 'Alcantara fabric', price: alcantaraPrice || null, colours: ALCANTARA_COLOURS, verified: !!alcantaraPrice },
+    { id: 'gentle', label: 'Gentle Fabric', price: null, colours: GENTLE_COLOURS, verified: false },
+    { id: 'diva', label: 'Diva leather', price: null, colours: DIVA_COLOURS, verified: false }
+  ];
+
+  // default price increments (relative to Festa/Laco base) per Chaplins
+  const defaults = { parade: 60, capa: 120, arda: 305, alcantara: 350, gentle: 550, diva: 1100 };
+  const inc = Object.assign({}, defaults, overrides || {});
+  const paradeInc = inc.parade;
+  const capaInc = inc.capa;
+  const ardaInc = inc.arda;
+  const alcantaraInc = inc.alcantara;
+  const gentleInc = inc.gentle;
+  const divaInc = inc.diva;
+
+  return [
+    { id: 'festa-laco', label: 'Festa/Laco', price: base, colours: FESTA_LACO_COLOURS, verified: true },
+    { id: 'parade', label: 'Parade Fabric', price: Math.round(base + paradeInc), colours: PARADE_COLOURS, verified: true },
+    { id: 'capa', label: 'Capa', price: Math.round(base + capaInc), colours: CAPA_COLOURS, verified: true },
+    { id: 'arda', label: 'Arda', price: Math.round(base + ardaInc), colours: ARDA_COLOURS, verified: true },
+    { id: 'alcantara', label: 'Alcantara fabric', price: alcantaraPrice ? alcantaraPrice : Math.round(base + alcantaraInc), colours: ALCANTARA_COLOURS, verified: !!(alcantaraPrice || base) },
+    { id: 'gentle', label: 'Gentle Fabric', price: Math.round(base + gentleInc), colours: GENTLE_COLOURS, verified: true },
+    { id: 'diva', label: 'Diva leather', price: Math.round(base + divaInc), colours: DIVA_COLOURS, verified: true }
+  ];
+}
+
+const CATALOGUE = {
+  "fireside-chair": {
+    name: "Togo Fireside Chair",
+    spec: "W 87cm · D 102cm · H 70cm · Seat height 38cm",
+    url: "https://chaplins.co.uk/shop/ligne-roset-togo-fireside-lounge-chair.html",
+    materials: [
+      { id: 'festa-laco', label: 'Festa/Laco', price: 2125, colours: FESTA_LACO_COLOURS, verified: true },
+      { id: 'parade', label: 'Parade Fabric', price: 2185, colours: PARADE_COLOURS, verified: true },
+      { id: 'capa', label: 'Capa', price: 2245, colours: CAPA_COLOURS, verified: true },
+      { id: 'arda', label: 'Arda', price: 2430, colours: ARDA_COLOURS, verified: true },
+      { id: 'alcantara', label: 'Alcantara fabric', price: 2475, colours: ALCANTARA_COLOURS, verified: true },
+      { id: 'gentle', label: 'Gentle Fabric', price: 2675, colours: GENTLE_COLOURS, verified: true },
+      { id: 'diva', label: 'Diva leather', price: 3225, colours: DIVA_COLOURS, verified: true }
+    ]
+  },
+  "footstool": {
+    name: "Togo Footstool",
+    spec: "W 87cm · D 80cm · H 34cm",
+    url: "https://chaplins.co.uk/shop/ligne-roset-togo-footstool.html",
+    materials: [
+      { id: 'festa-laco', label: 'Festa/Laco', price: 1365, colours: FESTA_LACO_COLOURS, verified: true },
+      { id: 'parade', label: 'Parade Fabric', price: 1410, colours: PARADE_COLOURS, verified: true },
+      { id: 'capa', label: 'Capa', price: 1445, colours: CAPA_COLOURS, verified: true },
+      { id: 'arda', label: 'Arda', price: 1560, colours: ARDA_COLOURS, verified: true },
+      { id: 'alcantara', label: 'Alcantara fabric', price: 1590, colours: ALCANTARA_COLOURS, verified: true },
+      { id: 'gentle', label: 'Gentle Fabric', price: 1750, colours: GENTLE_COLOURS, verified: true },
+      { id: 'diva', label: 'Diva leather', price: 1960, colours: DIVA_COLOURS, verified: true }
+    ]
+  },
+  "corner-seat": {
+    name: "Togo Corner Seat",
+    spec: "W 102cm · D 102cm · H 70cm · Seat height 38cm",
+    url: "https://chaplins.co.uk/shop/ligne-roset-togo-corner-seat.html",
+    materials: [
+      { id: 'festa-laco', label: 'Festa/Laco', price: 2945, colours: FESTA_LACO_COLOURS, verified: true },
+      { id: 'parade', label: 'Parade Fabric', price: 3025, colours: PARADE_COLOURS, verified: true },
+      { id: 'capa', label: 'Capa', price: 3105, colours: CAPA_COLOURS, verified: true },
+      { id: 'arda', label: 'Arda', price: 3345, colours: ARDA_COLOURS, verified: true },
+      { id: 'alcantara', label: 'Alcantara fabric', price: 3410, colours: ALCANTARA_COLOURS, verified: true },
+      { id: 'gentle', label: 'Gentle Fabric', price: 3740, colours: GENTLE_COLOURS, verified: true },
+      { id: 'diva', label: 'Diva leather', price: 4440, colours: DIVA_COLOURS, verified: true }
+    ]
+  },
+  "small-sofa": {
+    name: "Togo Small Settee",
+    spec: "W 131cm · D 102cm · H 70cm",
+    url: "https://chaplins.co.uk/shop/ligne-roset-togo-small-sofa.html",
+    materials: [
+      { id: 'festa-laco', label: 'Festa/Laco', price: 3030, colours: FESTA_LACO_COLOURS, verified: true },
+      { id: 'parade', label: 'Parade Fabric', price: 3110, colours: PARADE_COLOURS, verified: true },
+      { id: 'capa', label: 'Capa', price: 3195, colours: CAPA_COLOURS, verified: true },
+      { id: 'arda', label: 'Arda', price: 3450, colours: ARDA_COLOURS, verified: true },
+      { id: 'alcantara', label: 'Alcantara fabric', price: 3520, colours: ALCANTARA_COLOURS, verified: true },
+      { id: 'gentle', label: 'Gentle Fabric', price: 3870, colours: GENTLE_COLOURS, verified: true },
+      { id: 'diva', label: 'Diva leather', price: 4475, colours: DIVA_COLOURS, verified: true }
+    ]
+  },
+  "large-sofa": {
+    name: "Togo Large Settee",
+    spec: "W 174cm · D 102cm · H 70cm",
+    url: "https://chaplins.co.uk/shop/ligne-roset-togo-large-sofa.html",
+    materials: [
+      { id: 'festa-laco', label: 'Festa/Laco', price: 3950, colours: FESTA_LACO_COLOURS, verified: true },
+      { id: 'parade', label: 'Parade Fabric', price: 4060, colours: PARADE_COLOURS, verified: true },
+      { id: 'capa', label: 'Capa', price: 4175, colours: CAPA_COLOURS, verified: true },
+      { id: 'arda', label: 'Arda', price: 4510, colours: ARDA_COLOURS, verified: true },
+      { id: 'alcantara', label: 'Alcantara fabric', price: 4600, colours: ALCANTARA_COLOURS, verified: true },
+      { id: 'gentle', label: 'Gentle Fabric', price: 5070, colours: GENTLE_COLOURS, verified: true },
+      { id: 'diva', label: 'Diva leather', price: 5720, colours: DIVA_COLOURS, verified: true }
+    ]
+  },
+  "medium-sofa": {
+    name: "Togo Medium Sofa",
+    spec: "W 198cm · D 102cm · H 70cm",
+    // Prices taken directly from the provided spreadsheet (Column B labels used verbatim).
+    url: "https://chaplins.co.uk/shop/ligne-roset-togo-medium-sofa.html",
+    materials: [
+      { id: 'festa-laco', label: 'Festa/Laco', price: 4710, colours: FESTA_LACO_COLOURS, verified: true },
+      { id: 'parade', label: 'Parade Fabric', price: 4830, colours: PARADE_COLOURS, verified: true },
+      { id: 'capa', label: 'Capa', price: 4950, colours: CAPA_COLOURS, verified: true },
+      { id: 'arda', label: 'Arda', price: 5310, colours: ARDA_COLOURS, verified: true },
+      { id: 'alcantara', label: 'Alcantara fabric', price: 5415, colours: ALCANTARA_COLOURS, verified: true },
+      { id: 'gentle', label: 'Gentle Fabric', price: 5915, colours: GENTLE_COLOURS, verified: true },
+      { id: 'diva', label: 'Diva leather', price: 7145, colours: DIVA_COLOURS, verified: true }
+    ]
+  },
+  "complete-corner-sofa": {
+    name: "Togo Complete Corner Sofa",
+    spec: "W 276cm · D 233cm · H 70cm · Seat height 38cm",
+    url: "https://chaplins.co.uk/shop/ligne-roset-togo-corner-sofa.html",
+    materials: [
+      { id: 'festa-laco', label: 'Festa/Laco', price: 9925, colours: FESTA_LACO_COLOURS, verified: true },
+      { id: 'parade', label: 'Parade Fabric', price: 10200, colours: PARADE_COLOURS, verified: true },
+      { id: 'capa', label: 'Capa', price: 10480, colours: CAPA_COLOURS, verified: true },
+      { id: 'arda', label: 'Arda', price: 11305, colours: ARDA_COLOURS, verified: true },
+      { id: 'alcantara', label: 'Alcantara fabric', price: 11535, colours: ALCANTARA_COLOURS, verified: true },
+      { id: 'gentle', label: 'Gentle Fabric', price: 12680, colours: GENTLE_COLOURS, verified: true },
+      { id: 'diva', label: 'Diva leather', price: 14635, colours: DIVA_COLOURS, verified: true }
+    ]
+  },
+  "boss-lounge-chair": {
+    name: "Togo Boss Lounge Chair",
+    spec: "Exclusive BOSS two-tone finish · dimensions on request",
+    url: "https://chaplins.co.uk/shop/ligne-roset-togo-boss-lounge-chair.html",
+    materials: [
+      { id: 'boss-grege', label: 'Grege', price: 2990, colours: [], verified: true, photo: 'boss-grege' },
+      { id: 'boss-graphite', label: 'Graphite', price: 2990, colours: [], verified: true, photo: 'boss-graphite' }
+    ]
+  },
+  "safari": {
+    name: "Togo Safari",
+    spec: "Tablu fabric by Sahco · dimensions on request",
+    materials: [
+      { id: 'safari-zebra', label: 'Zebra', price: 3620, colours: [], verified: true, isSafari: true, photo: 'images/zebra.jpeg' },
+      { id: 'safari-panther', label: 'Panther', price: 3620, colours: [], verified: true, isSafari: true, photo: 'images/panther.jpg' }
+    ]
+  }
+};
+
+/* ============================================================
+   PHOTOS — keyed by "productId__Colour" for the standard Alcantara
+   colours. Coverage is partial; falls back to a general shot of
+   the piece, with a note, when there's no exact match. Safari and
+   Boss entries carry their own fixed photo instead.
+   ============================================================ */
+
+const PHOTO_MAP = {
+  "fireside-chair__Pearl Grey": "https://cdn11.bigcommerce.com/s-hi9nbuups9/images/stencil/1280x1280/products/17526/96403/991508d8c4dfeeb3e0be78c39cadaf1370a9eef7_togo_alcantara_pearl_grey__53003.1709124589.jpg?c=1"
+};
+
+const PRODUCT_FALLBACK_PHOTO = {
+  "fireside-chair": "https://cdn11.bigcommerce.com/s-hi9nbuups9/images/stencil/1280x1280/products/17526/96401/3464e38ceb26ba007a6c54fa98c96621fd5e689a_chaplins_ligne_roset_togo_fireside_chair_2__88543.1709124589.jpg?c=1",
+  "footstool": "https://cdn11.bigcommerce.com/s-hi9nbuups9/images/stencil/1280x1280/products/17497/96167/c2ee1454c7d9e0a51a9060e9519f46301aa04918_chaplins_ligne_roset_togo_footstool_black_1__08790.1708363252.jpg?c=1",
+  "corner-seat": "https://cdn11.bigcommerce.com/s-hi9nbuups9/images/stencil/1280x1280/products/17498/96168/e5022ccb4887bfda51c6ce3a7232cb16572ae4d2_chaplins_ligne_roset_togo_corner_sofa_4_2__55738.1708424081.jpg?c=1",
+  "small-sofa": "https://cdn11.bigcommerce.com/s-hi9nbuups9/images/stencil/1280x1280/products/17865/98665/13e7ee9be1d1a96d2e62b1fffa577556b0956671_chaplins_ligne_roset_togo_small_sofa__25125.1716972717.jpg?c=1",
+  "large-sofa": "https://cdn11.bigcommerce.com/s-hi9nbuups9/images/stencil/1280x1280/products/17148/90876/67a3ec594cd6675054fcbd9f2ae51b836b5c8784_chaplins_ligne_roset_togo_large_sofa_3__36638.1700493157.jpg?c=1",
+  "medium-sofa": "https://cdn11.bigcommerce.com/s-hi9nbuups9/images/stencil/1280x1280/products/17920/99121/951e725b723ae99a682e7a15f39cded2e179f32d_Ligne_Roset_Togo_medium_Sofa_1__26517.1717762342.jpg?c=1",
+  "complete-corner-sofa": "https://cdn11.bigcommerce.com/s-hi9nbuups9/images/stencil/1280x1280/products/17651/97234/bc91b28777d18be3f928e1370d31cf35aa466d11_mg001462_1__99564.1711452991.jpg?c=1",
+  "boss-lounge-chair": "https://cdn11.bigcommerce.com/s-hi9nbuups9/images/stencil/1280x1280/products/20798/124065/6ed9f4c8f0013ccbe51e6bc35a4e18acd3321838_togo_boss_grege__01146.1784794605.jpg?c=1"
+};
+
+const BOSS_PHOTO = {
+  'boss-grege': "https://cdn11.bigcommerce.com/s-hi9nbuups9/images/stencil/1280x1280/products/20798/124065/6ed9f4c8f0013ccbe51e6bc35a4e18acd3321838_togo_boss_grege__01146.1784794605.jpg?c=1",
+  'boss-graphite': "https://cdn11.bigcommerce.com/s-hi9nbuups9/images/stencil/1280x1280/products/20798/124078/6bbbb251d82b5480437e61ad7d75ea93d14acf2e_togo_boss_graphite__94250.1784814822.jpg?c=1"
+};
+
+/* ============================================================
+   Calculator logic
+   ============================================================ */
+
+const state = { productId: null, materialId: null, colour: null };
+
+const productSelect = document.getElementById('product');
+const materialOptions = document.getElementById('materialOptions');
+const fabricNote = document.getElementById('fabricNote');
+const colourOptions = document.getElementById('colourOptions');
+const panelPhoto = document.getElementById('panelPhoto');
+const photoNote = document.getElementById('photoNote');
+const panelName = document.getElementById('panelName');
+const panelSpec = document.getElementById('panelSpec');
+const panelDims = document.getElementById('panelDims');
+const listPriceEl = document.getElementById('listPrice');
+const yourPriceEl = document.getElementById('yourPrice');
+const saveNote = document.getElementById('saveNote');
+const enquireBtn = document.getElementById('enquireBtn');
+const viewBtn = document.getElementById('viewBtn');
+
+function gbp(n){
+  return new Intl.NumberFormat('en-GB', { style: 'currency', currency: 'GBP', maximumFractionDigits: 0 }).format(n);
+}
+
+const SWATCH_HEX = {
+  // Festa
+  'Alezan': '#B85C2D', 'Blanc': '#FFFFFF', 'Bleau paon': '#004B87', 'Brume': '#9FA5A7',
+  'Cachou': '#8B6F47', 'Cauri': '#D4A574', 'Mimosa': '#F4D03F', 'Veronese': '#2E7D32',
+  // Laco
+  'Aigumarine Laco': '#7ECCC4', 'Anis Laco': '#A6C854', 'Anthracite Laco': '#454545',
+  'Argent Laco': '#B8B8B8', 'Ecru Laco': '#E8DCC8', 'Emeralde Laco': '#3CB371',
+  'Framboise Laco': '#C9184A', 'Lie De Vin Laco': '#722E56', 'Marine Laco': '#003F87',
+  'Miel Laco': '#C9A961', 'Sapin Laco': '#355E3B', 'Vieux Rose Laco': '#B8768B',
+  // Parade
+  'Amande 3921': '#D8B896', 'Anthracite 3927': '#3F3F3F', 'Bouteille 3924': '#2F4538',
+  'Cafe 3929': '#6B4423', 'Ecru 3922': '#D4CCC0', 'Green Blue 3928': '#4A7C7E',
+  'Indigo 3926': '#1F3B5B', 'Rose 3920': '#C8847F', 'Terre Brulee 3923': '#8B4513',
+  'Violine 3925': '#5D4E8B',
+  // Capa
+  'Bouton Capa': '#8B6F47', 'Brique Capa': '#A0442C', 'Amande Capa': '#D4B896',
+  'Anthracite Capa': '#3A3A38', 'Blue Capa': '#4B7C9F', 'Ecru Capa': '#E4D9CE',
+  'Grege Capa': '#C9B8A0', 'Gris Capa': '#8A8A8A', 'Outremer Capa': '#004B87',
+  'Rose Capa': '#D9827B', 'Vert Capa': '#5A8C6F',
+  // Arda
+  'Arda 0351': '#7B5A4C', 'Arda 0313': '#6E5C4F', 'Arda 0161': '#B89968',
+  'Arda 0201': '#A68E7E', 'Arda 0211': '#8B7355', 'Arda 0321': '#7A9C87',
+  'Arda 0671': '#5F7F7A', 'Arda 0771': '#7A6F5C', 'Arda 0791': '#8B8680',
+  'Arda 0931': '#6B5B4F', 'Arda 0991': '#54504B', 'Arda 0961': '#7F776E',
+  // Alcantara (already defined, keeping for clarity)
+  'Nile blue 7996': '#0B5A8A', 'Almond green': '#9AAE8A', 'Anthracite': '#3A3A38',
+  'Aubergine': '#4A2A3A', 'Aubusson': '#7C8E7A', 'Slate black': '#2F2F2F',
+  'Bohemian': '#4C5F6B', 'Cadmium': '#C24A2E', 'Camel': '#C19A6B',
+  'Chic grey': '#8C8A82', 'Commodore': '#6E7A6E', 'Curry': '#C98A2C',
+  'Dark camel': '#B7864D', 'Dove grey': '#BFBFC0', 'Eggshell': '#F0EAD6',
+  'Ice': '#E8F0F3', 'Infanta': '#D9C6D0', 'Kiwi': '#7C8A3C', 'Lizard': '#65825D',
+  'Navy blue': '#1F3B5B', 'Orange': '#C9642B', 'Pearl': '#B9B7AF',
+  'Pompeian': '#8B3A2F', 'Powder': '#D6DCE6', 'Sea': '#5EA3A3',
+  'Sea sand': '#D8C7A6', 'Steel': '#6E6E6B', 'Trekking': '#5B6E5B',
+  // Gentle
+  'Anthracite 3213': '#3F3F3F', 'Bordeaux 3211': '#6B2D26', 'Onyx 3212': '#1C1C1C',
+  'Petrole 3220': '#2F5A6F', 'Prune 3216': '#5B4E7A', 'Abricot 3209': '#E8A878',
+  'Breeze 3214': '#7BC8DA', 'Cerise 3228': '#E63946', 'Ciel 3219': '#87CEEB',
+  'Cosmos 3217': '#FFB6C1', 'Fiesta 3229': '#FF6B35', 'Funghi 3225': '#8B7355',
+  'Herbal 3223': '#6B8E23', 'Iron 3215': '#5C6F7A', 'Marsala 3227': '#7D3C3C',
+  'Misty 3224': '#B0C4DE', 'Pin 3222': '#E91E63', 'Roi 3218': '#4169E1',
+  'Rouille 3210': '#A0522D', 'Sarcelle 3221': '#3A7CA5', 'Tender 3226': '#FFB6D9',
+  // Diva
+  'Ice 109': '#E8F0F3', 'Marine 77127': '#1F3B5B', 'Fauve 33001': '#8B4513',
+  'Blanc 100': '#FFFFFF', 'Noir 99999': '#1C1C1C', 'Perle 1037': '#F5F5F5',
+  'Taupe 13072': '#B8B8B8', 'Laurier 1003': '#6B4423', 'Chanvre 1061': '#8B7355',
+  'Silex 11049': '#808080', 'Sable 22030': '#C2B280', 'Noisette 33004': '#8B6914',
+  'Cerise 35126': '#DC143C', 'Courge 45065': '#FF8C00', 'Bisque 54035': '#FFE4C4',
+  'Rouge 55002': '#C1272D', 'Platine 71017': '#D3D3D3', 'Indigo 77158': '#1F3B5B',
+  'Cachou 93068': '#8B6F47', 'Fudge 93129': '#6B4423', 'Graphite 97038': '#383838',
+  'Egee 17027': '#4A90E2', 'Foret 98015': '#1B4D2B', 'Albatre 118': '#F5F5F0',
+  'Grege 1021': '#C9B8A0', 'Silice 1085': '#A9A9A9', 'Acier 11033': '#6C7A7F',
+  'Roche 11073': '#8B8680', 'Pierre 13048': '#8B8680', 'Mastic 13087': '#D4AF37',
+  'Chamois 22024': '#C19A6B', 'Gold 44012': '#FFD700', 'Camel 43054': '#C19A6B',
+  'Ardoise 91102': '#4F5D73', 'Marron 93099': '#6B4423', 'Cypres 98047': '#2F4538',
+  'Lilas 1043': '#C8A2C8', 'Amande 33077': '#D4B896', 'Sunset 45035': '#FF6347',
+  'Ocre 54021': '#CC7722', 'Soleil 54033': '#FFD700', 'Cacao 93109': '#5C4033',
+  'Beluga 98087': '#36454F'
+};
+
+function buildProductSelect(){
+  productSelect.innerHTML = '';
+  Object.keys(CATALOGUE).forEach(id => {
+    const opt = document.createElement('option');
+    opt.value = id;
+    opt.textContent = CATALOGUE[id].name;
+    productSelect.appendChild(opt);
+  });
+}
+
+function buildMaterialGroup(product){
+  materialOptions.innerHTML = '';
+  fabricNote.textContent = product.materials.some(m => m.isSafari)
+    ? 'Two Safari finishes — Zebra and Panther.'
+    : '';
+  product.materials.forEach((mat, i) => {
+    const btn = document.createElement('button');
+    btn.type = 'button';
+    btn.className = 'opt' + (mat.isSafari ? ' safari' : '');
+    btn.dataset.id = mat.id;
+    btn.innerHTML = `${mat.label}<span class="opt-sub">${mat.price != null ? gbp(mat.price) : 'Enquire'}</span>`;
+    btn.addEventListener('click', () => {
+      state.materialId = mat.id;
+      [...materialOptions.children].forEach(c => c.classList.remove('selected'));
+      btn.classList.add('selected');
+      buildColourGroup(mat);
+      render();
+    });
+    materialOptions.appendChild(btn);
+    if (i === 0) { state.materialId = mat.id; btn.classList.add('selected'); }
+  });
+}
+
+function buildColourGroup(material){
+  colourOptions.innerHTML = '';
+  if (!material.colours.length){
+    const note = document.createElement('p');
+    note.className = 'no-colour-note';
+    note.textContent = material.isSafari || material.photo
+      ? 'Fixed finish — no separate colour choice.'
+      : 'Contact us for available colours in this fabric.';
+    colourOptions.appendChild(note);
+    state.colour = null;
+    return;
+  }
+  material.colours.forEach((colour, i) => {
+    const btn = document.createElement('button');
+    btn.type = 'button';
+    btn.className = 'opt colour';
+    btn.dataset.colour = colour;
+    const hex = SWATCH_HEX[colour] || '#999';
+    btn.innerHTML = `<span class="swatch" style="background:${hex}"></span>${colour}`;
+    btn.addEventListener('click', () => {
+      state.colour = colour;
+      [...colourOptions.children].forEach(c => c.classList.remove('selected'));
+      btn.classList.add('selected');
+      render();
+    });
+    colourOptions.appendChild(btn);
+    if (i === 0) { state.colour = colour; btn.classList.add('selected'); }
+  });
+}
+
+function loadProduct(id){
+  const product = CATALOGUE[id];
+  state.productId = id;
+  buildMaterialGroup(product);
+  const firstMaterial = product.materials.find(m => m.id === state.materialId);
+  buildColourGroup(firstMaterial);
+  render();
+}
+
+function render(){
+  const product = CATALOGUE[state.productId];
+  const material = product.materials.find(m => m.id === state.materialId);
+
+  // Photo
+  let photoSrc;
+  if (material.isSafari){
+    photoSrc = material.photo;
+  } else if (material.photo && BOSS_PHOTO[material.photo]){
+    photoSrc = BOSS_PHOTO[material.photo];
+  } else {
+    const exactKey = `${state.productId}__${state.colour}`;
+    photoSrc = (state.colour && PHOTO_MAP[exactKey]) || PRODUCT_FALLBACK_PHOTO[state.productId] || '';
+  }
+  panelPhoto.src = photoSrc;
+  panelPhoto.alt = state.colour ? `${product.name}, ${material.label} ${state.colour}` : `${product.name}, ${material.label}`;
+
+  const exactMatch = material.isSafari || (material.photo && BOSS_PHOTO[material.photo]) || (state.colour && PHOTO_MAP[`${state.productId}__${state.colour}`]);
+  photoNote.textContent = (state.colour && !exactMatch)
+    ? `Photo shown in a different colour — exact ${state.colour} photography not available`
+    : '';
+
+  panelName.textContent = material.isSafari ? `${product.name} — ${material.label}` : product.name;
+  panelSpec.textContent = state.colour ? `${material.label} \u00b7 ${state.colour}` : material.label;
+  panelDims.textContent = product.spec;
+
+  if (material.price == null){
+    listPriceEl.textContent = 'Enquire';
+    yourPriceEl.textContent = 'Enquire';
+    saveNote.textContent = '';
+  } else {
+    const listPrice = material.price;
+    const yourPrice = Math.round(listPrice * (1 - DISCOUNT_RATE));
+    const savedAmount = listPrice - yourPrice;
+    listPriceEl.textContent = gbp(listPrice);
+    yourPriceEl.textContent = gbp(yourPrice);
+    saveNote.textContent = `You save ${gbp(savedAmount)} off list`;
+  }
+
+  // product page link
+  if (product.url){
+    viewBtn.style.display = 'block';
+    viewBtn.href = product.url;
+  } else {
+    viewBtn.style.display = 'none';
+    viewBtn.href = '#';
+  }
+}
+
+productSelect.addEventListener('change', (e) => loadProduct(e.target.value));
+
+enquireBtn.addEventListener('click', () => {
+  const product = CATALOGUE[state.productId];
+  const material = product.materials.find(m => m.id === state.materialId);
+
+  let priceText, yourPriceText;
+  if (material.price == null){
+    priceText = 'Enquire';
+    yourPriceText = 'Enquire';
+  } else {
+    const yourPrice = Math.round(material.price * (1 - DISCOUNT_RATE));
+    priceText = gbp(material.price);
+    yourPriceText = gbp(yourPrice);
+  }
+
+  const message = encodeURIComponent(
+    `Hi, I'd like to enquire about this price for ${product.name}.\n\nFabric: ${material.label}\nColour: ${state.colour || 'TBC'}\nPrice: ${priceText}\nYour price: ${yourPriceText}\n\nPlease share more details.`
+  );
+
+  window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${message}`, '_blank');
+});
+
+buildProductSelect();
+loadProduct(Object.keys(CATALOGUE)[0]);
+</script>
+</body>
+</html>
